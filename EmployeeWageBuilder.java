@@ -1,7 +1,8 @@
 package com.Oops;
 
+import java.util.ArrayList;
 /**
- * Refactor the code to manage employee wage of multiple companies using interface
+ * Refactor to have list of multiple companies to manage Employee wage
  */
 
 public class EmployeeWageBuilder implements EmpWageInterface {
@@ -9,8 +10,8 @@ public class EmployeeWageBuilder implements EmpWageInterface {
     public static final int IS_PARTTIME = 2;
     public static final int IS_ABSENT = 0;
 
-    private int numOfCompany = 0;
-    private EmployeeWage[] employeeWages;
+    public int numOfCompany = 0;
+    public ArrayList<EmployeeWage> companyEmpWageList;
 
     public static void main(String[] args) {
         EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
@@ -20,20 +21,21 @@ public class EmployeeWageBuilder implements EmpWageInterface {
     }
 
     public EmployeeWageBuilder() {
-        employeeWages = new EmployeeWage[10];
+        companyEmpWageList = new ArrayList<>();
     }
 
     @Override
     public void addCompanyWage(String companyName, int max_working_hrs, int days_in_month, int wage_per_hr) {
-        employeeWages[numOfCompany] = new EmployeeWage(companyName, max_working_hrs, days_in_month, wage_per_hr);
-        numOfCompany++;
+        EmployeeWage employeeWage = new EmployeeWage(companyName, max_working_hrs, days_in_month, wage_per_hr);
+        companyEmpWageList.add(employeeWage);
     }
 
     @Override
     public void computeEmpWage() {
-        for (int i = 0; i < numOfCompany; i++) {
-            employeeWages[i].setTotalWage(this.computeEmpWage(employeeWages[i]));
-            System.out.println(employeeWages[i]);
+        for (int i = 0; i < companyEmpWageList.size(); i++) {
+            EmployeeWage employeeWage = companyEmpWageList.get(i);
+            employeeWage.setTotalWage(this.computeEmpWage(employeeWage));
+            System.out.println(employeeWage);
         }
     }
 
