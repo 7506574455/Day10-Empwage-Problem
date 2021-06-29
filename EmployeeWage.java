@@ -1,7 +1,7 @@
 package com.Oops;
 
 /**
- * setting the values using constructor
+ *  values using constructor
  */
 public class EmployeeWage {
     public String companyName;
